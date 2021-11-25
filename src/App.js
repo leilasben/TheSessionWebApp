@@ -4,6 +4,7 @@ import './App.css';
 
 import LandingPage from '../src/Pages/LandingPage'
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 const App = () => {
   return (
     <>
@@ -14,6 +15,7 @@ const App = () => {
             <LandingPage />
           </Route>
         </Switch>
+        <Footer />
     </Router>
     </>
   );
