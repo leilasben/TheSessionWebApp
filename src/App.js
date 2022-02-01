@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
+
 import Login from '../src/Pages/Login';
 import LandingPage from '../src/Pages/LandingPage'
 import RegisterAccount from '../src/Pages/RegisterAccount'
+import Home from '../src/Pages/Home';
+import Tunes from '../src/Pages/Tunes'
+
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import  Home  from '../src/Pages/Home';
+
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
   return (
@@ -13,7 +17,7 @@ function PrivateRoute({ component: Component, authenticated, ...rest }) {
       {...rest}
       render={(props) => authenticated === true
         ? <Component {...props} />
-        : <Redirect to={{ pathname: '/Login', state: { from: props.location } }} />}
+        : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
     />
   )
 }
@@ -59,15 +63,10 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path="/" exact component={LandingPage}/>
-      	  <PublicRoute path='/login' authenticated={this.state.authenticated} component={Login}/>
-          <PublicRoute path='/RegisterAccount' authenticated={this.state.authenticated} component={RegisterAccount}/>
-          <PublicRoute path='/home' authenticated={this.state.authenticated} component={Home}/>
-
-{/* 
-          <Route exact path = "/forgot" component={Forgot}></Route>
-
-          <PrivateRoute path="/Geography" authenticated={this.state.authenticated} component={Quiz1}></PrivateRoute> */}
-
+      	  <PublicRoute path='/login' component={Login}/>
+          <PublicRoute path='/RegisterAccount' component={RegisterAccount}/>
+          <PrivateRoute path='/home' authenticated={this.state.authenticated} component={Home}/>
+          <PrivateRoute path='/tunes' authenticated={this.state.authenticated} component={Tunes} />
         </Switch>
       </Router>
     );

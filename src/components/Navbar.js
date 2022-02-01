@@ -5,8 +5,18 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import firebase from 'firebase/compat/app';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from "../services/firebase";
 
+function SignOut() {
+    return auth.currentUser && (
+        <Button onClick={() => auth.signOut()} className='nav-links' color="primary" variant="contained" startIcon={<LogoutIcon />}>Sign Out</Button>
+      )
+    }
 function Navbar() {
+    const [user] = useAuthState(auth);
+
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -54,7 +64,7 @@ function Navbar() {
                         <li className='nav-item'>
                             <ThemeProvider theme={theme}>
                             <Stack direction="row" spacing={2}>
-                                <Button onClick={() => { <Link to='/Signout'></Link>}} className='nav-links' color="primary" variant="contained" startIcon={<LogoutIcon />}>Sign Out</Button>
+                                <SignOut />
                             </Stack>
                             </ThemeProvider>
                             {/* <Link to='/signup' className='nav-links'

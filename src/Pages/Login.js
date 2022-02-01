@@ -103,15 +103,7 @@ function App() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
-              type="submit"
-              onClick={login}
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
+            <Link to="/home"><Button type="submit" onClick={login} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>Sign In</Button></Link>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

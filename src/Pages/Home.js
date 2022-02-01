@@ -19,6 +19,8 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -31,9 +33,13 @@ export default class LandingPage extends Component{
     render(){
         return(
             <div className="container-content">
+                <Navbar />
                 {/* <div className="logo">
                     <img src={logo} top="100%" height="200px" width="300px" left="15%" position="absolute"/>
                 </div> */}
+                <img src={logo} top="100%" height="200px" width="300px" left="15%" position="absolute"/>
+                        <h3>The Session is a community website dedicated to 
+                            Irish Traditional Music.</h3>
                 <div className="card">
                 <Box sx={{ flexGrow: 1 }}>
                 <Grid
@@ -42,12 +48,11 @@ export default class LandingPage extends Component{
                     justifyContent="space-evenly"
                     alignItems="baseline"
                     >
+                        {/* <Grid item md={3}>
+                        
+                        </Grid> */}
                         <Grid item md={3}>
-                        <img src={logo} top="100%" height="200px" width="300px" left="15%" position="absolute"/>
-                        <p>The Session is a community website dedicated to 
-                            Irish Traditional Music.</p>
-                        </Grid>
-                        <Grid item md={3}>
+                        <Link to="/tunes">
                             <Card sx={{ maxWidth: 345 }} raised={(true)}>
                                 <CardActionArea>
                                 <CardMedia
@@ -56,7 +61,7 @@ export default class LandingPage extends Component{
                                     image= {tune}
                                     alt="tune"
                                 />
-                                <CardContent>
+                                <CardContent >
                                     <Typography gutterBottom variant="h5" component="div">
                                     Tunes
                                     </Typography>
@@ -65,8 +70,12 @@ export default class LandingPage extends Component{
                                     in the past week. See sheet music and listen to the tunes. 
                                     </Typography>
                                 </CardContent>
+                                {/* <Link to="/tunes"><Button size="small" color="primary">
+                                See More
+                                </Button></Link> */}
                                 </CardActionArea>
                             </Card>
+                            </Link>
                         </Grid>
                         <Grid item md={3}>
                             <Card sx={{ maxWidth: 345 }} raised={(true)}>
@@ -169,8 +178,11 @@ export default class LandingPage extends Component{
                                 </CardActionArea>
                             </Card>
                             </Grid>
+                            
                     </Grid>
+                    
                 </Box>
+                
                 </div>
             </div>
         );
