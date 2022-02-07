@@ -6,7 +6,12 @@ import Login from '../src/Pages/Login';
 import LandingPage from '../src/Pages/LandingPage'
 import RegisterAccount from '../src/Pages/RegisterAccount'
 import Home from '../src/Pages/Home';
-import Tunes from '../src/Pages/Tunes'
+import Tunes from '../src/Pages/Tunes';
+import Discussions from '../src/Pages/Discussions';
+import Events from '../src/Pages/Events';
+import Recordings from '../src/Pages/Recordings';
+import Sessions from '../src/Pages/Sessions';
+import Trips from '../src/Pages/Trips';
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -67,6 +72,13 @@ class App extends Component {
           <PublicRoute path='/RegisterAccount' component={RegisterAccount}/>
           <PrivateRoute path='/home' authenticated={this.state.authenticated} component={Home}/>
           <PrivateRoute path='/tunes' authenticated={this.state.authenticated} component={Tunes} />
+          <PrivateRoute path='/discussions' authenticated={this.state.authenticated} component={Discussions} />
+          <PrivateRoute path='/events' authenticated={this.state.authenticated} component={Events} />
+          <PrivateRoute path='/recordings' authenticated={this.state.authenticated} component={Recordings} />
+          <PrivateRoute path='/sessions' authenticated={this.state.authenticated} component={Sessions} />
+          <PrivateRoute path='/trips' authenticated={this.state.authenticated} component={Trips} />
+
+
         </Switch>
       </Router>
     );

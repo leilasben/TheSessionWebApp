@@ -8,7 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import firebase from 'firebase/compat/app';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "../services/firebase";
-
+import logo from '../images/thesessiontransparent.png';
 function SignOut() {
     return auth.currentUser && (
         <Button onClick={() => auth.signOut()} className='nav-links' color="primary" variant="contained" startIcon={<LogoutIcon />}>Sign Out</Button>
@@ -50,7 +50,9 @@ function Navbar() {
         <>
             <nav className="navbar">
                 <div className="navbar-container">
-                    <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>The Session</Link>
+                    <Link to="/home" className="navbar-logo" onClick={closeMobileMenu}>
+                        <a><img src ={logo} width="200" height="100"></img></a>
+                    </Link>
                     <div className='menu-icon' onClick={handleClick}>
                         <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                     </div>

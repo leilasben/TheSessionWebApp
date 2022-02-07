@@ -1,13 +1,28 @@
-import React, { Component } from "react";
+import React, {useState} from "react";
+import axios from "axios";
 
-export default class Trips extends Component{
-    render(){
-        return(
-        <div>
-            <h1>
-                Landing Page
-            </h1>
+function Trip() {
+
+    const [trip, setTrip] = useState([])
+
+    const getTrip = () => {
+        axios.get("https://thesession.org/trips/new?format=json").then((response) => {
+            console.log(response);
+            setTrip(response.data.trips)
+        });
+    };
+    React.useEffect(() => {
+        getTrip();
+    }, []);
+    return(
+        <div className="item-container">
+            <h1>hello</h1>
+            <div>
+                {trip.map((trips) => (
+                    <p>{trips.name}</p>
+                ))}
+            </div>
         </div>
-        );
-    }
+    )
 }
+    export default Trip;
