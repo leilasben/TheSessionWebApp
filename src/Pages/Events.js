@@ -36,32 +36,29 @@ function Event() {
     return(
         <div className="item-container">
             <Navbar />
-            <h1>Upcoming events and sessions</h1>
-            {/* <div>
-                {event.map((events) => (
-                    <p>{events.latitude},{events.longitude}</p>
-                ))}
-            </div> */}
-            <Grid container spacing={2} direction ="row" paddingTop={4}>
+            <h1 style={{textAlign: 'center', fontFamily: 'Roboto', paddingTop: 2}}>Upcoming events and sessions</h1>
+            <Grid container direction ="row" paddingTop={4} alignItems="center" justifyContent="center" item xs={3} sm={6} md={12}>
             {event.map((events) => (
-            <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        title={events.name}
-        subheader={events.venue.name}
-      />
-      <CardContent>
-        <Typography variant="subtitle1" color="text.secondary">
-          <p>Member: {events.member.name}</p>
-          <p>Date: {events.dtstart}</p>
-        </Typography>
-        <Map height={300} defaultCenter={[events.latitude, events.longitude]} defaultZoom={18}>
-      <Marker width={50} anchor={[events.latitude, events.longitude]} />
-      </Map>
-      </CardContent>
-    </Card>
-    ))}
-    </Grid>
-            
+            <Card sx={{ maxWidth: 345, minWidth: 345 }}>
+                <CardHeader
+                    title={events.name}
+                    subheader={events.venue.name}
+                />
+                <CardContent>
+                    <Typography variant="subtitle1" color="text.secondary">
+                    <p>Member: {events.member.name}</p>
+                    <p>Date: {events.dtstart}</p>
+                    </Typography>
+                    {events.latitude && <Map height={300} defaultCenter={[events.latitude, events.longitude]} defaultZoom={18}>
+                    <Marker width={50} anchor={[events.latitude, events.longitude]} /></Map>
+                    }
+                    {events.venue == "online" && 
+                    <p>event being held online</p>}
+                </CardContent>
+                {/* various venues */}
+                </Card>
+                ))}
+                </Grid>
             <Footer/>
         </div>
     );

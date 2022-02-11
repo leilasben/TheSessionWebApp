@@ -43,15 +43,11 @@ function Home() {
     React.useEffect(() => {
         getNews();
     }, []);
-
+    
     return(
         <div className="item-container">
             <div className="container-content">
                 <Navbar />
-                {/* <div className="logo">
-                    <img src={logo} top="100%" height="200px" width="300px" left="15%" position="absolute"/>
-                </div> */}
-                {/* <img src={logo} top="100%" height="200px" width="300px" left="15%" position="absolute"/> */}
                 <br></br>
                 <h2 style={{textAlign: 'center', fontFamily: 'Roboto', paddingTop: 2}}>The Session is a community website dedicated to 
                             Irish Traditional Music.</h2>
