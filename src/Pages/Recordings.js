@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {Link} from "react-router-dom";
+import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -50,7 +50,8 @@ export default function Album() {
           </Container>
         </Box>
         <Container maxWidth="md">
-          <Grid container spacing={4}>{recording.map((recordings) => (
+          <Grid container spacing={4}>
+            {recording.map((recordings) => (
               <Grid item key={recordings} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -66,7 +67,7 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small"><Link style={{ textDecoration: 'none' }} to={`/recordinginfo/${recordings.id}`}>See Recording List</Link></Button> 
+                    <Button size="small">View</Button>
                   </CardActions>
                 </Card>
               </Grid>
