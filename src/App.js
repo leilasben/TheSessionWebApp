@@ -10,6 +10,7 @@ import Tunes from '../src/Pages/Tunes';
 import Events from '../src/Pages/Events';
 import Recordings from '../src/Pages/Recordings';
 import tuneid from '../src/Pages/tuneid';
+import recordingid from '../src/Pages/recordingid';
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -74,7 +75,7 @@ class App extends Component {
           <PrivateRoute path='/events' authenticated={this.state.authenticated} component={Events} />
           <PrivateRoute path='/recordings' authenticated={this.state.authenticated} component={Recordings} />
           <PrivateRoute path='/tuneinfo/:id' authenticated={this.state.authenticated} component={tuneid} />
-
+          <PrivateRoute path='/recordinginfo/:id' authenticated={this.state.authenticated} component={recordingid} />
         </Switch>
       </Router>
     );
