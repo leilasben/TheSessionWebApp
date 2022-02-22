@@ -70,7 +70,7 @@ export default function TuneInfo(props) {
     // }
 
     var abc = (`X:1\nT:${indTune.name}\nK:${indTune.settings?.[0].key}\n${indTune.settings?.[0].abc}`);
-    renderAbc("target", abc)
+    renderAbc("target", abc, { responsive: "resize" })
 
     if(id == 'undefined'){
         return(
@@ -99,8 +99,10 @@ export default function TuneInfo(props) {
         <br></br>
         {/* <Typography>{indTune.aliases} {" "}</Typography> */}
         <Typography variant="h5">Aliases:</Typography><br></br>
-        <TagCloud tags={chArray} minSize={3} maxSize={6} renderer={customRenderer} />
-        <div id="target">
+        <TagCloud tags={chArray} minSize={2} maxSize={4} renderer={customRenderer} />
+        <br></br>
+        <Divider />
+        <div align = "center" id="target">
          <Container maxWidth="md" />
             </div>
             <Footer />

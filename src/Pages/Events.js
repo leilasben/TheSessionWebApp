@@ -2,24 +2,14 @@ import React, {useState} from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Grid } from "@mui/material";
 import { Map, Marker } from "pigeon-maps"
-
+import { Box } from "@mui/system";
+import { Container } from "@mui/material";
 function Event() {
     const [event, setEvent] = useState([])
 
@@ -35,11 +25,20 @@ function Event() {
 
     return(
         <div className="item-container">
-            <Navbar />
+            <Navbar/>
+            <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6,}}>
+            <Container maxWidth="sm">
             <h1 style={{textAlign: 'center', fontFamily: 'Roboto', paddingTop: 2}}>Upcoming events and sessions</h1>
-            <Grid container direction ="row" paddingTop={4} alignItems="center" justifyContent="center" item xs={3} sm={6} md={12}>
+            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+              See map for location details
+            </Typography>
+          </Container>
+          </Box>
+          <Container maxWidth="lg">
+            <Grid container spacing={1}>
             {event.map((events) => (
-            <Card sx={{ maxWidth: 345, minWidth: 345 }}>
+            <Grid item key={events} xs={12} sm={6} md={4}>
+            <Card sx={{ maxWidth: 445, minWidth: 345, minHeight: 600 }}>
                 <CardHeader
                     title={events.name}
                     subheader={events.venue.name}
@@ -57,9 +56,10 @@ function Event() {
                 </CardContent>
                 {/* various venues */}
                 </Card>
+                </Grid>
                 ))}
                 </Grid>
-            <Footer/>
+            </Container>
         </div>
     );
 }

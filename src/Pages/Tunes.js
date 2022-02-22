@@ -14,6 +14,7 @@ import Grid from '@mui/material/Grid';
 import {Link} from "react-router-dom";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import Chart from 'react-apexcharts';
 
 function Tune() {
     const [tune, setTune] = useState([])
@@ -29,6 +30,28 @@ function Tune() {
         getTune();
     }, []);
 
+    const series = [
+        {
+            name: "Number of tunebooks",
+            data: tune.map(e => e.tunebooks),
+            fillColor: '#EB8C87'
+        }
+    ];
+
+    const options = {
+        chart: {
+            id: "simple-bar",
+        },
+        plotOptions: {
+            bar: {
+              horizontal: true, //horizontal bar chart
+            },
+        },
+        xaxis: {
+            categories: tune.map(d => d.name)
+        }
+    };
+    
     return (
         <div className="item-container">
             <Navbar/>
@@ -41,6 +64,9 @@ function Tune() {
           </Container>
           </Box>
           <Container maxWidth="md">
+          <div>
+                <Chart options={options} type="bar" series={series} width="80%" />
+            </div>
             <Grid container spacing={4}>
                 {tune.map((tunes) => (
                     <Grid item key={tunes} xs={12} sm={6} md={4}>
