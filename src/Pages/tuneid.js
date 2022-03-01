@@ -65,9 +65,6 @@ export default function TuneInfo(props) {
           {tag.value}
         </span>
       )
-    // for(let i=0; i<30; i++){
-        
-    // }
 
     var abc = (`X:1\nT:${indTune.name}\nK:${indTune.settings?.[0].key}\n${indTune.settings?.[0].abc}`);
     renderAbc("target", abc, { responsive: "resize" })
