@@ -1,24 +1,16 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import logo from '../images/thesessiontransparent.png';
 import tune from '../images/tunes.jpg'
 import recording from '../images/recordings.jpg'
-import trips from '../images/trips.jpg'
-import sessions from '../images/sessions.jpg';
 import events from '../images/events.jpg'
-import discussions from '../images/discussions.jpg'
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from "@mui/material";
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
@@ -58,8 +50,8 @@ function Home() {
                     justify="center"
                     >
                         <Grid item xs={12} sm={6} md={4}>
-                        <Link to="/tunes">
-                            <Card sx={{ maxWidth: 400 }} raised={(true)}>
+                        <Link style={{ textDecoration: 'none' }} to="/tunes">
+                            <Card sx={{ maxWidth: 400, minHeight:300 }} raised={(true)}>
                                 <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -76,16 +68,13 @@ function Home() {
                                     in the past week. See sheet music and listen to the tunes. 
                                     </Typography>
                                 </CardContent>
-                                {/* <Link to="/tunes"><Button size="small" color="primary">
-                                See More
-                                </Button></Link> */}
                                 </CardActionArea>
                             </Card>
                             </Link>
                         </Grid>
                         <Grid item xs={12} sm={6} md={4}>
-                            <Link to="/recordings">
-                            <Card sx={{ maxWidth: 400 }} raised={(true)}>
+                            <Link style={{ textDecoration: 'none' }} to="/recordings">
+                            <Card sx={{ maxWidth: 400, minHeight:300 }} raised={(true)}>
                                 <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -107,8 +96,8 @@ function Home() {
                             </Link>
                             </Grid>
                             <Grid item xs={12} sm={6} md={4}>
-                                <Link to = "/events">
-                            <Card sx={{ maxWidth: 400 }} raised={(true)}>
+                                <Link style={{ textDecoration: 'none' }} to = "/events">
+                            <Card sx={{ maxWidth: 400, minHeight:300 }} raised={(true)}>
                                 <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -144,7 +133,6 @@ function Home() {
                 <Grid container spacing={2} direction="column">
                     {news.map((article) => (
                         <div className="container-content">
-                            <CardActionArea component="a" href="#">
                             <Card sx={{ display: 'flex' }}>
                             <CardContent sx={{ flex: 1 }}>
                                 <Typography component="h2" variant="h5">
@@ -164,7 +152,6 @@ function Home() {
                                 image={article.image}
                             />
                             </Card>
-                        </CardActionArea>
                         </div>
                     ))}
                 </Grid>

@@ -1,21 +1,18 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, getAuth } from "firebase/auth";
 import { auth } from "../services/firebase";
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import { Link } from "react-router-dom";
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import logo from '../images/thesessiontransparent.png';
+import logo from '../images/thesessionlogo.png';
 
 function App() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -23,6 +20,13 @@ function App() {
 
   const [user, setUser] = useState({});
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#e5b219',
+      },
+    },
+  });
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
@@ -39,9 +43,16 @@ function App() {
       console.log(error.message);
     }
   };
-
-  const theme = createTheme();
-
+  const reset = async () => {
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, loginEmail)
+    .then(() => {
+      alert("Password reset email sent")
+    }).catch((error) => {
+      const errorCode = error.errorCode;
+      const errorMessage = error.message;
+    })
+  }
   return (
     <ThemeProvider theme={theme}>
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -70,11 +81,10 @@ function App() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Avatar src={logo} sx={{ m: 1, bgcolor: 'secondary.main', width: 160, height: 115 }}>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Welcome to The Session
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
@@ -99,19 +109,13 @@ function App() {
               autoComplete="current-password"
               onChange={(event) => { setLoginPassword(event.target.value); }}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Link to="/home"><Button type="submit" onClick={login} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>Sign In</Button></Link>
+            <Link style={{ textDecoration: 'none' }} to="/home"><Button type="submit" onClick={login} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>Sign In</Button></Link>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+                <Button onClick={reset}>Forgot password?</Button>   
               </Grid>
               <Grid item>
-                <Link to ='/RegisterAccount' variant="body2">
+                <Link style={{ textDecoration: 'none' }} to ='/RegisterAccount' variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

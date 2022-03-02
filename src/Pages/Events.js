@@ -2,14 +2,10 @@ import React, {useState} from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { Grid } from "@mui/material";
 import { Map, Marker } from "pigeon-maps"
 import { Box } from "@mui/system";
-import { Container } from "@mui/material";
+import { Container, CardHeader, CardContent, Card, Typography, Grid } from "@mui/material";
+
 function Event() {
     const [event, setEvent] = useState([])
 
@@ -54,12 +50,12 @@ function Event() {
                     {events.venue == "online" && 
                     <p>event being held online</p>}
                 </CardContent>
-                {/* various venues */}
                 </Card>
                 </Grid>
                 ))}
                 </Grid>
             </Container>
+            <Footer />
         </div>
     );
 }

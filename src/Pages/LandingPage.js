@@ -1,4 +1,3 @@
-import { Container } from "@mui/material";
 import React, { Component } from "react";
 import video from '../images/lpvi.mp4';
 import logo from '../images/thesessionlogo.png'
@@ -18,7 +17,6 @@ export default class Home extends Component{
             },
           });
         return(
-        <Container maxWidth="false">
             <div className="video-container">
                 <video autoPlay loop muted>
                     <source src={video} type='video/mp4' />
@@ -28,13 +26,12 @@ export default class Home extends Component{
             </div>
             <div className="btn-login">
             <ThemeProvider theme={theme}>
-                <Link to ='/login'>
+                <Link style={{ textDecoration: 'none' }} to ='/login'>
                     <Button variant="contained" endIcon={<SendIcon />}>Enter Site</Button>
                 </Link>
             </ThemeProvider>
             </div>
         </div>
-        </Container>
         );
     }
 }

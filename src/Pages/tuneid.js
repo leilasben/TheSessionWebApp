@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import { TagCloud } from 'react-tagcloud';
 import Footer from "../components/Footer"
 import { Divider } from "@mui/material";
+
 export default function TuneInfo(props) {
     const id  = props.match.params.id;
     
@@ -66,9 +67,10 @@ export default function TuneInfo(props) {
         </span>
       )
 
-    var abc = (`X:1\nT:${indTune.name}\nK:${indTune.settings?.[0].key}\n${indTune.settings?.[0].abc}`);
+    var abc = (`X:1\nT:${indTune.name}\nK:${setting?.[0].key}\n${setting?.[0].abc}`);
     renderAbc("target", abc, { responsive: "resize" })
 
+    console.log(indTune.settings?.[0].abc)
     if(id == 'undefined'){
         return(
             <div>
@@ -99,10 +101,8 @@ export default function TuneInfo(props) {
         <TagCloud tags={chArray} minSize={2} maxSize={4} renderer={customRenderer} />
         <br></br>
         <Divider />
-        <div align = "center" id="target">
-         <Container maxWidth="md" />
-            </div>
-            <Footer />
+        <div id="target"></div>
+        <Footer />
         </div> 
     )
 }
