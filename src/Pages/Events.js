@@ -5,12 +5,13 @@ import Footer from "../components/Footer";
 import { Map, Marker } from "pigeon-maps"
 import { Box } from "@mui/system";
 import { Container, CardHeader, CardContent, Card, Typography, Grid } from "@mui/material";
-
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 function Event() {
     const [event, setEvent] = useState([])
 
     const getEvent = () => {
-        axios.get("https://thesession.org/events/upcoming?format=json").then((response) => {
+        axios.get("https://thesession.org/events/upcoming?format=json&perpage=35").then((response) => {
             console.log(response);
             setEvent(response.data.events)
         });
@@ -44,11 +45,14 @@ function Event() {
                     <p>Member: {events.member.name}</p>
                     <p>Date: {events.dtstart}</p>
                     </Typography>
-                    {events.latitude && <Map height={300} defaultCenter={[events.latitude, events.longitude]} defaultZoom={18}>
+                    {events.latitude && <Map height={300} defaultCenter={[events.latitude, events.longitude]} defaultZoom={11}>
                     <Marker width={50} anchor={[events.latitude, events.longitude]} /></Map>
                     }
                     {events.venue == "online" && 
                     <p>event being held online</p>}
+                    {events.venue == "Various Venues" && 
+                    <p>event being held online</p>}
+                    <Button variant="outlined"><Link style={{ textDecoration: 'none' }} to={`/eventinfo/${events.id}`}>See Event Details</Link></Button> 
                 </CardContent>
                 </Card>
                 </Grid>

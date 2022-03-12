@@ -90,7 +90,7 @@ function App() {
               <Grid item xs={12}>
               </Grid>
             </Grid>
-            <Button onClick={register}> Create User</Button>
+            <Link to="/login"><Button onClick={register}>Create User</Button></Link>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/login" variant="body2">

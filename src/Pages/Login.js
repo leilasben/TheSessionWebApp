@@ -17,7 +17,8 @@ import logo from '../images/thesessionlogo.png';
 function App() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
+  const [loginPasswordError, setLoginPasswordError] = useState("");
+  const [loginEmailError, setLoginEmailError] = useState("");
   const [user, setUser] = useState({});
 
   const theme = createTheme({
@@ -38,21 +39,19 @@ function App() {
         loginEmail,
         loginPassword
       );
-      console.log(user);
     } catch (error) {
       console.log(error.message);
+      setLoginEmailError(
+        error.message === "Firebase: Error (auth/invalid-email)." &&
+          "Invalid Email"
+      );
+      setLoginPasswordError(
+        error.message === "Firebase: Error (auth/internal-error)." &&
+          "Incorrect Password"
+      );
     }
   };
-  const reset = async () => {
-    const auth = getAuth();
-    sendPasswordResetEmail(auth, loginEmail)
-    .then(() => {
-      alert("Password reset email sent")
-    }).catch((error) => {
-      const errorCode = error.errorCode;
-      const errorMessage = error.message;
-    })
-  }
+  
   return (
     <ThemeProvider theme={theme}>
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -87,6 +86,7 @@ function App() {
             Welcome to The Session
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
+            <div className="formFields">
             <TextField
               margin="normal"
               required
@@ -109,11 +109,17 @@ function App() {
               autoComplete="current-password"
               onChange={(event) => { setLoginPassword(event.target.value); }}
             />
+            </div>
+            <br />
+            <div>
+              <b>{loginEmailError}</b>
+              <b>{loginPasswordError}</b>
+            </div>
             <Link style={{ textDecoration: 'none' }} to="/home"><Button type="submit" onClick={login} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>Sign In</Button></Link>
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Button onClick={reset}>Forgot password?</Button>   
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <Link style={{ textDecoration: 'none' }} to ='/RegisterAccount' variant="body2">
                   {"Don't have an account? Sign Up"}
