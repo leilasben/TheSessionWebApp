@@ -13,12 +13,11 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../images/thesessionlogo.png';
-
+import validator from 'validator'
+import { async } from "@firebase/util";
 function App() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [loginPasswordError, setLoginPasswordError] = useState("");
-  const [loginEmailError, setLoginEmailError] = useState("");
   const [user, setUser] = useState({});
 
   const theme = createTheme({
@@ -28,30 +27,25 @@ function App() {
       },
     },
   });
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
+  
+  onAuthStateChanged(auth, (user) => {
+    setUser(user);
   });
 
   const login = async () => {
     try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
+      await signInWithEmailAndPassword(auth,loginEmail,loginPassword)
     } catch (error) {
       console.log(error.message);
-      setLoginEmailError(
-        error.message === "Firebase: Error (auth/invalid-email)." &&
-          "Invalid Email"
-      );
-      setLoginPasswordError(
-        error.message === "Firebase: Error (auth/internal-error)." &&
-          "Incorrect Password"
-      );
+      if(error.message === "Firebase: Error (auth/invalid-email)."){
+        alert("Invalid Email")
+      }
+      if(error.message === "Firebase: Error (auth/wrong-password)."){
+        alert("Password Incorrect. Please Try Again.")
+      }
     }
   };
-  
+
   return (
     <ThemeProvider theme={theme}>
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -110,12 +104,7 @@ function App() {
               onChange={(event) => { setLoginPassword(event.target.value); }}
             />
             </div>
-            <br />
-            <div>
-              <b>{loginEmailError}</b>
-              <b>{loginPasswordError}</b>
-            </div>
-            <Link style={{ textDecoration: 'none' }} to="/home"><Button type="submit" onClick={login} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>Sign In</Button></Link>
+            <Button type="button" sx={{ mt: 3, mb: 2 }} component={Link} to="/home" variant="contained" onClick={login}>Sign In</Button>
             <Grid container>
               {/* <Grid item xs>
                 <Button onClick={reset}>Forgot password?</Button>   

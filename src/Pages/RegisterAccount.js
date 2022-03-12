@@ -13,13 +13,20 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import logo from '../images/thesessionlogo.png';
 function App() {
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
-
     const [user, setUser] = useState({});
     
+    const theme = createTheme({
+      palette: {
+        primary: {
+          main: '#e5b219',
+        },
+      },
+    });
+
     onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
       });
@@ -32,13 +39,13 @@ function App() {
         registerPassword
       );
       console.log(user);
-    } catch (err) {
-      console.error(err);
-      alert(err.message)
+    } catch (error) {
+      console.log(error.message);
+      if(error.message === "Firebase: Error (auth/invalid-email)." ? "invalid email" : null){
+        alert("Invalid Email")
+      }
     }
   };
-
-  const theme = createTheme();
 
   return (
     <ThemeProvider theme={theme}>
@@ -52,8 +59,7 @@ function App() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Avatar src={logo} sx={{ m: 1, bgcolor: 'secondary.main', width: 160, height: 115 }}>
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -67,7 +73,6 @@ function App() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoComplete="email"
                   onChange={(event) => {
                     setRegisterEmail(event.target.value);
                 }}
@@ -81,16 +86,13 @@ function App() {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
                   onChange={(event) => {
                     setRegisterPassword(event.target.value);
                   }}
                 />
               </Grid>
-              <Grid item xs={12}>
-              </Grid>
             </Grid>
-            <Link to="/login"><Button onClick={register}>Create User</Button></Link>
+            <Button type="button" sx={{ mt: 3, mb: 2 }} component={Link} to="/home" variant="contained" onClick={register}>Create Account</Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/login" variant="body2">
