@@ -38,11 +38,17 @@ function App() {
         registerEmail,
         registerPassword
       );
-      console.log(user);
+      alert("Account Created. Feel free to sign in!")
     } catch (error) {
       console.log(error.message);
-      if(error.message === "Firebase: Error (auth/invalid-email)." ? "invalid email" : null){
+      if(error.message === "Firebase: Error (auth/invalid-email)."){
         alert("Invalid Email")
+      }
+      if(error.message === "Firebase: Password should be at least 6 characters (auth/weak-password)."){
+        alert("Password should be at least 6 characters.")
+      }
+      if(error.message === "Firebase: Error (auth/email-already-in-use)."){
+        alert("Email already in use. Please try again.")
       }
     }
   };
@@ -92,7 +98,8 @@ function App() {
                 />
               </Grid>
             </Grid>
-            <Button type="button" sx={{ mt: 3, mb: 2 }} component={Link} to="/home" variant="contained" onClick={register}>Create Account</Button>
+            <br></br>
+            <Button type="button" variant="contained" onClick={register}>Create Account</Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/login" variant="body2">

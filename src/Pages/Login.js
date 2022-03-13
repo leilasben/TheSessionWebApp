@@ -14,12 +14,12 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../images/thesessionlogo.png';
 import validator from 'validator'
-import { async } from "@firebase/util";
+import { useHistory } from "react-router";
 function App() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [user, setUser] = useState({});
-
+  const history = useHistory();
   const theme = createTheme({
     palette: {
       primary: {
@@ -28,13 +28,10 @@ function App() {
     },
   });
   
-  onAuthStateChanged(auth, (user) => {
-    setUser(user);
-  });
-
-  const login = async () => {
+  const Login = async () => {
     try {
       await signInWithEmailAndPassword(auth,loginEmail,loginPassword)
+      history.push('./home');
     } catch (error) {
       console.log(error.message);
       if(error.message === "Firebase: Error (auth/invalid-email)."){
@@ -104,7 +101,7 @@ function App() {
               onChange={(event) => { setLoginPassword(event.target.value); }}
             />
             </div>
-            <Button type="button" sx={{ mt: 3, mb: 2 }} component={Link} to="/home" variant="contained" onClick={login}>Sign In</Button>
+            <Button type="button" variant="contained" onClick={Login}>Sign In</Button>
             <Grid container>
               {/* <Grid item xs>
                 <Button onClick={reset}>Forgot password?</Button>   
