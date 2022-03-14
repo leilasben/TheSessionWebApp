@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { CardActionArea, CardContent, List, ListItemButton, ListItemText, Typography, ListItem, ListItemIcon, Container } from "@mui/material";
+import { List, ListItemText, Typography, ListItem, ListItemIcon, Container } from "@mui/material";
 import { Box } from "@mui/system";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
 import { Divider } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -46,13 +44,13 @@ export default function RecordingInfo(props) {
     };
     React.useEffect(() => {
         getindRecord();
-    }, []);
+    }, );
     React.useEffect(() => {
         getInfo();
-    }, []);
+    }, );
     React.useEffect(() => {
         getArtist();
-    }, []);
+    }, );
 
     console.log(artist)
 

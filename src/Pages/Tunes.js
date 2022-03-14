@@ -15,10 +15,18 @@ import {Link} from "react-router-dom";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Chart from 'react-apexcharts';
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useHistory } from "react-router";
 function Tune() {
     const [tune, setTune] = useState([])
-
+    const history = useHistory();
+    const theme = createTheme({
+        palette: {
+          primary: {
+            main: '#e5b219',
+          },
+        },
+      });
     const getTune = () => {
         axios.get("https://thesession.org/tunes/popular?format=json&perpage=15").then((response) => {
             console.log(response);
@@ -34,7 +42,7 @@ function Tune() {
         {
             name: "Number of tunebooks",
             data: tune.map(e => e.tunebooks),
-            fillColor: '#EB8C87'
+            fillColor: '#e5b219'
         }
     ];
 
@@ -51,13 +59,19 @@ function Tune() {
             categories: tune.map(d => d.name)
         }
     };
-    
+    const goNewTunes = () => {
+        history.push('/newtunes')
+    }
     return (
+        <ThemeProvider theme={theme}>
         <div className="item-container">
             <Navbar/>
+            <div align="center">
+            <br />
+            <Button variant="contained" onClick={goNewTunes}>See Newest Tunes</Button></div>
             <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6,}}>
             <Container maxWidth="sm">
-            <h1 style={{textAlign: 'center', fontFamily: 'Roboto', paddingTop: 1}}>Tunes</h1>
+            <h1 style={{textAlign: 'center', fontFamily: 'Roboto'}}>Tunes</h1>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
               Most Popular Tunes on The Session
             </Typography>
@@ -76,10 +90,10 @@ function Tune() {
                                     {tunes.name} 
                                 </Typography>
                                 <CardMedia>
-                                    {tunes.type == "reel" && <img src={fiddle}/>}
-                                    {tunes.type == "jig" && <img src={bodhran}/>}
-                                    {tunes.type == "slip jig" && <img src={banjo}/>}
-                                    {tunes.type == "hornpipe" && <img src={flute}/>}
+                                    {tunes.type === "reel" && <img alt="fiddle" src={fiddle}/>}
+                                    {tunes.type === "jig" && <img alt="bodhran" src={bodhran}/>}
+                                    {tunes.type === "slip jig" && <img alt="banjo" src={banjo}/>}
+                                    {tunes.type === "hornpipe" && <img alt="flute" src={flute}/>}
                                 </CardMedia>
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div">
@@ -88,7 +102,7 @@ function Tune() {
                                     <Typography variant="body2" color="text.secondary">
                                         Posted by: {tunes.member.name} 
                                     </Typography>
-                                    <Button variant="outlined"><Link style={{ textDecoration: 'none' }} to={`/tuneinfo/${tunes.id}`}>See Sheet Music</Link></Button> 
+                                    <Button type="button"  variant="text"><Link style={{ textDecoration: 'none' }} to={`/tuneinfo/${tunes.id}`}>See Sheet Music</Link></Button> 
                                 </CardContent>
                             </CardActionArea>
                         </Card>
@@ -97,6 +111,7 @@ function Tune() {
                 </Grid>
             </Container>
         </div>
+        </ThemeProvider>
     );
 }
 

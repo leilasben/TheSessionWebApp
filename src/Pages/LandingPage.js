@@ -22,7 +22,7 @@ export default class Home extends Component{
                     <source src={video} type='video/mp4' />
                 </video>
             <div class="caption">
-                <img src={logo} />
+                <img alt="logo" src={logo} />
             </div>
             <div className="btn-login">
             <ThemeProvider theme={theme}>

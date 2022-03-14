@@ -45,9 +45,7 @@ export default function Album() {
         <Container maxWidth="md">
           <Grid container spacing={4}>{recording.map((recordings) => (
               <Grid item key={recordings} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                >
+                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
                       {recordings.name}

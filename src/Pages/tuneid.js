@@ -3,7 +3,6 @@ import axios from "axios";
 import { renderAbc } from "abcjs";
 import Navbar from "../components/Navbar";
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { TagCloud } from 'react-tagcloud';
 import Footer from "../components/Footer"
 import { Divider } from "@mui/material";
@@ -37,15 +36,15 @@ export default function TuneInfo(props) {
 
     React.useEffect(() => {
         getindTune();
-    }, []);
+    }, );
 
     React.useEffect(() => {
         getAliases();
-    }, []);
+    }, );
 
     React.useEffect(() => {
         getSetting();
-    }, []);
+    }, );
 
     console.log(indTune)
     const customRenderer = (tag, size, color) => (
@@ -71,7 +70,7 @@ export default function TuneInfo(props) {
     renderAbc("target", abc, { responsive: "resize" })
 
     console.log(indTune.settings?.[0].abc)
-    if(id == 'undefined'){
+    if(id === 'undefined'){
         return(
             <div>
             <Navbar />

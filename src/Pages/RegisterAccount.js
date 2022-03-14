@@ -6,19 +6,18 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import { Link } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../images/thesessionlogo.png';
+import { useHistory } from 'react-router';
 function App() {
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const [user, setUser] = useState({});
-    
+    const history = useHistory();
     const theme = createTheme({
       palette: {
         primary: {
@@ -53,6 +52,10 @@ function App() {
     }
   };
 
+  const loginPage = () => {
+    history.push('./login')
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -79,9 +82,7 @@ function App() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  onChange={(event) => {
-                    setRegisterEmail(event.target.value);
-                }}
+                  onChange={(event) => { setRegisterEmail(event.target.value); }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -98,13 +99,11 @@ function App() {
                 />
               </Grid>
             </Grid>
-            <br></br>
+            <br />
             <Button type="button" variant="contained" onClick={register}>Create Account</Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/login" variant="body2">
-                  Already have an account? Sign in
-                </Link>
+              <Button type="button" variant="text" onClick={loginPage}>Already have an account? Sign In</Button>
               </Grid>
             </Grid>
           </Box>

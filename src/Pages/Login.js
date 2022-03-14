@@ -1,24 +1,23 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, getAuth } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import { Link } from "react-router-dom";
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../images/thesessionlogo.png';
-import validator from 'validator'
 import { useHistory } from "react-router";
+
 function App() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [user, setUser] = useState({});
+  
   const history = useHistory();
   const theme = createTheme({
     palette: {
@@ -42,7 +41,9 @@ function App() {
       }
     }
   };
-
+  const register = () => {
+    history.push('./RegisterAccount')
+  }
   return (
     <ThemeProvider theme={theme}>
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -102,14 +103,9 @@ function App() {
             />
             </div>
             <Button type="button" variant="contained" onClick={Login}>Sign In</Button>
-            <Grid container>
-              {/* <Grid item xs>
-                <Button onClick={reset}>Forgot password?</Button>   
-              </Grid> */}
+            <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link style={{ textDecoration: 'none' }} to ='/RegisterAccount' variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+              <Button type="button" variant="text" onClick={register}>Don't have an account? Sign Up</Button>
               </Grid>
             </Grid>
           </Box>

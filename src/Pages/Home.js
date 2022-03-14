@@ -46,8 +46,6 @@ function Home() {
                     direction="row"
                     alignItems="baseline"
                     spacing={3}
-                    alignItems="center"
-                    justify="center"
                     >
                         <Grid item xs={12} sm={6} md={4}>
                         <Link style={{ textDecoration: 'none' }} to="/tunes">
@@ -144,7 +142,7 @@ function Home() {
                                 <Typography variant="subtitle1" paragraph>
                                 {article.description}
                                 </Typography>
-                                <a target="_blank" href={article.url}> <Button id="bt" >Continue Reading...</Button> </a>
+                                <a href={article.url}> <Button id="bt" >Continue Reading...</Button> </a>
                             </CardContent>
                             <CardMedia
                                 component="img"

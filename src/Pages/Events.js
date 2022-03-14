@@ -5,14 +5,12 @@ import Footer from "../components/Footer";
 import { Map, Marker } from "pigeon-maps"
 import { Box } from "@mui/system";
 import { Container, CardHeader, CardContent, Card, Typography, Grid } from "@mui/material";
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+
 function Event() {
     const [event, setEvent] = useState([])
 
     const getEvent = () => {
-        axios.get("https://thesession.org/events/upcoming?format=json&perpage=35").then((response) => {
-            console.log(response);
+        axios.get("https://thesession.org/events/upcoming?format=json&perpage=36").then((response) => {
             setEvent(response.data.events)
         });
     };
@@ -21,6 +19,7 @@ function Event() {
     }, []);
 
     return(
+        
         <div className="item-container">
             <Navbar/>
             <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6,}}>
@@ -36,28 +35,20 @@ function Event() {
             {event.map((events) => (
             <Grid item key={events} xs={12} sm={6} md={4}>
             <Card sx={{ maxWidth: 445, minWidth: 345, minHeight: 600 }}>
-                <CardHeader
-                    title={events.name}
-                    subheader={events.venue.name}
-                />
-                <CardContent>
-                    <Typography variant="subtitle1" color="text.secondary">
-                    <p>Member: {events.member.name}</p>
-                    <p>Date: {events.dtstart}</p>
-                    </Typography>
-                    {events.latitude && <Map height={300} defaultCenter={[events.latitude, events.longitude]} defaultZoom={11}>
-                    <Marker width={50} anchor={[events.latitude, events.longitude]} /></Map>
-                    }
-                    {events.venue == "online" && 
-                    <p>event being held online</p>}
-                    {events.venue == "Various Venues" && 
-                    <p>event being held online</p>}
-                    <Button variant="outlined"><Link style={{ textDecoration: 'none' }} to={`/eventinfo/${events.id}`}>See Event Details</Link></Button> 
+                <CardContent sx={{ flexGrow: 1 }}>
+                    <CardHeader title={events.name} subheader={events.venue.name}/>
+                    {events.latitude && <Map height={300} defaultCenter={[events.latitude, events.longitude]} defaultZoom={13}>
+                    <Marker width={50} anchor={[events.latitude, events.longitude]}/></Map>}
+                    <Typography variant="subtitle1" gutterBottom>Posted by: {events.member.name}</Typography>
+                    <Typography variant="subtitle1" gutterBottom>Taking Place on: {events.dtstart}</Typography>
+                    <Typography variant="subtitle1" gutterBottom>{events.venue.telephone}</Typography>
+                    <Typography variant="subtitle1" gutterBottom><address><a href="mailto:{events.venue.email}">{events.venue.email}</a></address></Typography>
+                    <Typography variant="subtitle1" gutterBottom><a href={events.venue.web}>{events.venue.web}</a></Typography>
                 </CardContent>
-                </Card>
-                </Grid>
-                ))}
-                </Grid>
+            </Card>
+            </Grid>
+            ))}
+            </Grid>
             </Container>
             <Footer />
         </div>
