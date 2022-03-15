@@ -55,12 +55,6 @@ function Navbar() {
                     </div>
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                         <li className='nav-item'>
-                            <Link to='/Account' className='nav-links'
-                                onClick={closeMobileMenu}>
-                                My Account
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
                             <ThemeProvider theme={theme}>
                             <SignOut />
                             </ThemeProvider>

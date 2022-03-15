@@ -47,24 +47,6 @@ export default function TuneInfo(props) {
     }, );
 
     console.log(indTune)
-    const customRenderer = (tag, size, color) => (
-        <span
-          key={tag.value}
-          style={{
-            animation: 'blinker 3s linear infinite',
-            animationDelay: `${Math.random() * 2}s`,
-            fontSize: `${size / 2}em`,
-            border: `2px solid ${color}`,
-            margin: 'auto',
-            padding: '2px',
-            display: 'center',
-            color: 'black',
-
-          }}
-        >
-          {tag.value}
-        </span>
-      )
 
     var abc = (`X:1\nT:${indTune.name}\nK:${indTune.settings?.[0].key}\n${indTune.settings?.[0].abc}`);
     renderAbc("target", abc, { responsive: "resize" })
@@ -83,7 +65,6 @@ export default function TuneInfo(props) {
     var chArray = [];
     for(let i =0; i < alias.length; i++) {
         ch.value = alias[i];
-        ch.count = Math.random() * (35 - 12 + 1) + 12
         chArray.push({...ch})
     }
     
@@ -95,9 +76,8 @@ export default function TuneInfo(props) {
         <br></br>
         <Divider />
         <br></br>
-        {/* <Typography>{indTune.aliases} {" "}</Typography> */}
         <Typography variant="h5">Aliases:</Typography><br></br>
-        <TagCloud tags={chArray} minSize={2} maxSize={4} renderer={customRenderer} />
+        <TagCloud tags={chArray} minSize={12} maxSize={35}/>
         <br></br>
         <Divider />
         <div id="target"></div>

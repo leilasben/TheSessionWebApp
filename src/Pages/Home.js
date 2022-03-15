@@ -14,10 +14,18 @@ import Box from '@mui/material/Box';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Home() {
     const [news, setNews] = useState([])
 
+    const theme = createTheme({
+        palette: {
+          primary: {
+            main: '#e5b219',
+          },
+        },
+      });
     const getNews = () => {
         axios.get("https://gnews.io/api/v4/search?q=trad music&token=91ba12c13f45bac993d9db1f7c80cf69&lang=en").then((response) => {
             console.log(response);
@@ -30,6 +38,7 @@ function Home() {
     }, []);
     
     return(
+        <ThemeProvider theme={theme}>
         <div className="item-container">
             <div className="container-content">
                 <Navbar />
@@ -142,7 +151,7 @@ function Home() {
                                 <Typography variant="subtitle1" paragraph>
                                 {article.description}
                                 </Typography>
-                                <a href={article.url}> <Button id="bt" >Continue Reading...</Button> </a>
+                                <a style={{ textDecoration: 'none' }} href={article.url}> <Button id="bt" >Continue Reading...</Button> </a>
                             </CardContent>
                             <CardMedia
                                 component="img"
@@ -159,7 +168,7 @@ function Home() {
                 </div>
             </div>
         </div>
-        
+        </ThemeProvider>
     )
 }
 export default Home;
