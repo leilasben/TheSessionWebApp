@@ -5,11 +5,19 @@ import Navbar from "../components/Navbar";
 import Typography from '@mui/material/Typography';
 import { TagCloud } from 'react-tagcloud';
 import Footer from "../components/Footer"
-import { Divider } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import { Container } from "@mui/material";
+import { Link } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 export default function TuneInfo(props) {
     const id  = props.match.params.id;
-    
+    const theme = createTheme({
+        palette: {
+          primary: {
+            main: '#e5b219',
+          },
+        },
+      });
     const [indTune, setindTune] = useState([])
     const [alias, setAliases ] = useState([])
     const [setting, setSetting ] = useState([])
@@ -33,7 +41,6 @@ export default function TuneInfo(props) {
             setSetting(response.data.settings)
         });
     };
-
     React.useEffect(() => {
         getindTune();
     }, );
@@ -70,7 +77,10 @@ export default function TuneInfo(props) {
     
     return(
         <div align = "center">
+            <ThemeProvider theme={theme}>
         <Navbar />
+        <br />
+        <Link to ="/tunes" style={{ color: 'black', textDecoration: 'none' }}><Button variant="contained">Back</Button></Link>
         <Container maxWidth="lg">
         <br></br>
         <Typography variant="h3">{indTune.name} - {indTune.type}</Typography>
@@ -89,6 +99,8 @@ export default function TuneInfo(props) {
         <Typography>{indTune.settings?.[0].abc}</Typography>
         </Container>
         <Footer />
+        </ThemeProvider>
         </div> 
+        
     )
 }

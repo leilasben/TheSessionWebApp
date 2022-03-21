@@ -84,9 +84,9 @@ function Tune() {
             <Grid container spacing={4}>
                 {tune.map((tunes) => (
                     <Grid item key={tunes} xs={12} sm={6} md={4}>
-                        <Link style={{ textDecoration: 'none' }} to={`/tuneinfo/${tunes.id}`}>
                         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} raised={(true)}>
                             <CardActionArea>
+                            <Link style={{ color: 'black', textDecoration: 'none' }} to={`/tuneinfo/${tunes.id}`}>
                                 <Typography gutterBottom variant="h5" component="div" align="center">
                                     {tunes.name} 
                                 </Typography>
@@ -105,9 +105,9 @@ function Tune() {
                                     </Typography>
                                     <Typography variant="button">See Tune Information and Sheet Music</Typography>
                                 </CardContent>
+                                </Link>
                             </CardActionArea>
                         </Card>
-                        </Link>
                     </Grid>
                     ))} 
                 </Grid>
