@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import axios from "axios";
 import { renderAbc } from "abcjs";
+import abcjs from "abcjs";
+import 'abcjs/abcjs-audio.css';
 import Navbar from "../components/Navbar";
 import Typography from '@mui/material/Typography';
 import { TagCloud } from 'react-tagcloud';
@@ -53,8 +55,6 @@ export default function TuneInfo(props) {
         getSetting();
     }, );
 
-    console.log(indTune)
-
     var abc = (`X:1\nK:${indTune.settings?.[0].key}\n${indTune.settings?.[0].abc}`);
     renderAbc("target", abc, { responsive: "resize", format: { partsbox:true }, oneSVGPerLine: true})
 
@@ -77,7 +77,7 @@ export default function TuneInfo(props) {
     
     return(
         <div align = "center">
-            <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
         <Navbar />
         <br />
         <Link to ="/tunes" style={{ color: 'black', textDecoration: 'none' }}><Button variant="contained">Back</Button></Link>
@@ -96,7 +96,7 @@ export default function TuneInfo(props) {
         <Typography variant="h4">Sheet music notation</Typography><div id="target"></div>
         <Divider />
         <Typography variant="h4">ABC notation</Typography>
-        <Typography>{indTune.settings?.[0].abc}</Typography>
+        <pre className="source">X:1 K:{indTune.settings?.[0].key} {indTune.settings?.[0].abc}</pre>
         </Container>
         <Footer />
         </ThemeProvider>

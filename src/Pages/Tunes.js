@@ -69,7 +69,7 @@ function Tune() {
             <div align="center">
             <br />
             <Button variant="contained" onClick={goNewTunes}>See Newest Tunes</Button></div>
-            <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6,}}>
+            <Box sx={{ bgcolor: 'background.paper', pt: 3, pb: 2,}}>
             <Container maxWidth="sm">
             <h1 style={{textAlign: 'center', fontFamily: 'Roboto'}}>Tunes</h1>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
