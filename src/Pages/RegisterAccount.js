@@ -38,6 +38,7 @@ function App() {
         registerPassword
       );
       alert("Account Created. Feel free to sign in!")
+      history.push('./login')
     } catch (error) {
       console.log(error.message);
       if(error.message === "Firebase: Error (auth/invalid-email)."){
@@ -53,7 +54,7 @@ function App() {
   };
 
   const loginPage = () => {
-    history.push('./login')
+    
   }
 
   return (

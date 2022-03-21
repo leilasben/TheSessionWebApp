@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { TagCloud } from 'react-tagcloud';
 import Footer from "../components/Footer"
 import { Divider } from "@mui/material";
-
+import { Container } from "@mui/material";
 export default function TuneInfo(props) {
     const id  = props.match.params.id;
     
@@ -48,8 +48,8 @@ export default function TuneInfo(props) {
 
     console.log(indTune)
 
-    var abc = (`X:1\nT:${indTune.name}\nK:${indTune.settings?.[0].key}\n${indTune.settings?.[0].abc}`);
-    renderAbc("target", abc, { responsive: "resize" })
+    var abc = (`X:1\nK:${indTune.settings?.[0].key}\n${indTune.settings?.[0].abc}`);
+    renderAbc("target", abc, { responsive: "resize", format: { partsbox:true }, oneSVGPerLine: true})
 
     console.log(indTune.settings?.[0].abc)
     if(id === 'undefined'){
@@ -71,16 +71,23 @@ export default function TuneInfo(props) {
     return(
         <div align = "center">
         <Navbar />
+        <Container maxWidth="lg">
         <br></br>
-        <Typography variant="h4">{indTune.name} appears in {indTune.tunebooks} tunebooks. It is a {indTune.type}.</Typography>
+        <Typography variant="h3">{indTune.name} - {indTune.type}</Typography>
+        <Typography variant="h5">Appears in <b>{indTune.tunebooks}</b> tunebooks.</Typography>
+        <Typography variant="h5">There are <b>{indTune.recordings}</b> recordings of this tune and it appears in <b>{indTune.collections}</b> other tune collections.</Typography>
         <br></br>
         <Divider />
         <br></br>
-        <Typography variant="h5">Aliases:</Typography><br></br>
+        <Typography variant="h5">Also known as:</Typography><br></br>
         <TagCloud tags={chArray} minSize={12} maxSize={35}/>
         <br></br>
         <Divider />
-        <div id="target"></div>
+        <Typography variant="h4">Sheet music notation</Typography><div id="target"></div>
+        <Divider />
+        <Typography variant="h4">ABC notation</Typography>
+        <Typography>{indTune.settings?.[0].abc}</Typography>
+        </Container>
         <Footer />
         </div> 
     )
