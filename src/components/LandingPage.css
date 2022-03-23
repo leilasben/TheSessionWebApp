@@ -11,7 +11,6 @@
   object-fit: fill;
 }
 
-/* Just styling the content of the div, the *magic* in the previous rules */
 .video-container .caption {
   z-index: 1;
   position: relative;

@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
 import { renderAbc } from "abcjs";
-import abcjs from "abcjs";
 import 'abcjs/abcjs-audio.css';
 import Navbar from "../components/Navbar";
 import Typography from '@mui/material/Typography';
@@ -54,11 +53,12 @@ export default function TuneInfo(props) {
     React.useEffect(() => {
         getSetting();
     }, );
-
+    //render sheet music
     var abc = (`X:1\nK:${indTune.settings?.[0].key}\n${indTune.settings?.[0].abc}`);
     renderAbc("target", abc, { responsive: "resize", format: { partsbox:true }, oneSVGPerLine: true})
 
     console.log(indTune.settings?.[0].abc)
+    //let user know there is no information available for this tune
     if(id === 'undefined'){
         return(
             <div>
@@ -67,7 +67,7 @@ export default function TuneInfo(props) {
             </div>
         )
     }
-    
+    //word cloud
     var ch = {};
     var chArray = [];
     for(let i =0; i < alias.length; i++) {

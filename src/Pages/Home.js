@@ -1,3 +1,4 @@
+//home page which acts as a entry point to the application
 import React, { useState } from "react";
 import axios from "axios";
 import tune from '../images/tunes.jpg'

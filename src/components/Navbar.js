@@ -1,3 +1,4 @@
+// Navbar created using https://www.youtube.com/watch?v=fL8cFqhTHwA&t=1305s as a reference
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import './Navbar.css';
@@ -12,6 +13,7 @@ function SignOut() {
         <Button onClick={() => auth.signOut()} className='nav-links' color="primary" variant="contained" startIcon={<LogoutIcon />}>Sign Out</Button>
       )
     }
+    
 function Navbar() {
 
     const [click, setClick] = useState(false);

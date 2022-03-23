@@ -68,6 +68,7 @@ class App extends Component {
 
       	  <PublicRoute path='/login' component={Login}/>
           <PublicRoute path='/RegisterAccount' component={RegisterAccount}/>
+          
           <PrivateRoute path='/home' authenticated={this.state.authenticated} component={Home}/>
           <PrivateRoute path='/tunes' authenticated={this.state.authenticated} component={Tunes} />
           <PrivateRoute path='/events' authenticated={this.state.authenticated} component={Events} />
